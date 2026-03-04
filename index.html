@@ -964,7 +964,7 @@ function boot(){
 }
 
 // ════════════════════════════════════════════
-//  QUESTIONS DATABASE
+//  QUESTIONS DATABASE — ЖАҢА СҰРАҚТАР ҚОСЫЛДЫ (ТАПҚЫРЛЫҚ)
 // ════════════════════════════════════════════
 const CATS = [
   {
@@ -1055,10 +1055,11 @@ const CATS = [
       {
         id:'tapqyr', icon:'lightbulb', iconColor:'#fde047', name:'Тапқырлық',
         qs:[
-          {pts:10, q:'Желдеткіш бір минутта 600 айналым жасаса, 10 секундта неше айналым жасайды?', opts:['А) 60','Б) 100','В) 10','Г) 50'], ok:1, law:'600 ÷ 60 × 10 = 100 айналым.'},
-          {pts:20, q:'Қайсы сан квадраттаса да, кубқа да шықса да нөл болады?', opts:['А) 1','Б) -1','В) 0','Г) 10'], ok:2, law:'0² = 0, 0³ = 0 — нөлдің кез келген дәрежесі нөл.'},
-          {pts:30, q:'Кесте үстінде 3 алма бар, 1-ін алдық. Неше қалды?', opts:['А) 2','Б) 3','В) 1','Г) 0'], ok:0, law:'Тапқырлық: 3 алманың 1-ін алдық дегеніміз 1 бізде, 2 кестеде қалды — жауап 2.'},
-          {pts:40, q:'Маман 5 машинаны 5 минутта жөндесе, 100 машинаны қанша уақытта жөндейді?', opts:['А) 100 минут','Б) 500 минут','В) 5 минут','Г) 20 минут'], ok:0, law:'Тапқырлық: 1 маман 1 машинаны 5 минутта жөндейді. 100 машина × 1 мин = 100 минут.'},
+          // ЖАҢА СҰРАҚТАР (СУРЕТТЕРГЕ АРНАЛҒАН)
+          {pts:10, q:'[1-сурет] 2, 3, 4, 5, 6 сандары белгілі бір заңдылықпен орналасқан. Жұлдызшаның орнына қандай сан сәйкес келеді?', opts:['А) 4','Б) 7','В) 8','Г) 9'], ok:0, law:'Дұрыс жауап: 4. Сандар тізбегінде 2-ден бастап әр санның орны 1-ге артып, сосын кему заңдылығы бар.'},
+          {pts:20, q:'[2-сурет] × = 27, + = 5, × = 108. Сонда + × = ?', opts:['А) 113','Б) 115','В) 117','Г) 119'], ok:0, law:'Дұрыс жауап: 113. Мұнда әр фигураның мәнін табу керек: төртбұрыш = 9, дөңгелек = 3, үшбұрыш = 4, жұлдыз = 6.'},
+          {pts:30, q:'[3-сурет] Суретте неше үшбұрыш бар? (Барлық үшбұрыштарды санаңыз)', opts:['А) 10','Б) 12','В) 13','Г) 16'], ok:2, law:'Дұрыс жауап: 13 үшбұрыш. Кішкентай үшбұрыштардан бастап, үлкенірек үшбұрыштарды да қосып санау керек.'},
+          {pts:40, q:'[4-сурет] + + = 18, + + = 36, + + = 45. Сонда + + = ?', opts:['А) 52','Б) 54','В) 56','Г) 58'], ok:1, law:'Дұрыс жауап: 54. Мұнда әр фигураның мәнін табу керек: көк төртбұрыш = 6, сары дөңгелек = 12, жасыл үшбұрыш = 15.'},
         ]
       },
     ]
@@ -1068,7 +1069,7 @@ const CATS = [
 // Flat question lookup
 const ALL_QUESTIONS = [];
 CATS.forEach(cat => cat.subs.forEach(sub => sub.qs.forEach(q => {
-  ALL_QUESTIONS.push({...q, catId:cat.id, subId:sub.id, catName:cat.name, subName:sub.name, catEmoji:cat.emoji, subEmoji:sub.emoji});
+  ALL_QUESTIONS.push({...q, catId:cat.id, subId:sub.id, catName:cat.name, subName:sub.name});
 })));
 
 // ════════════════════════════════════════════
@@ -1249,9 +1250,7 @@ function initMain(){
         ok.style.display='inline-block'; drawDone=true;
         SND.drawReveal();
         $('drawResult').classList.add('show');
-        $('drWinner').innerHTML = ordered.map((t,i)=>
-          `<span style="display:inline-flex;align-items:center;gap:5px;opacity:${1-i*0.12};"><span style="background:rgba(245,200,66,.2);border:1.5px solid rgba(245,200,66,.4);color:#f5c842;border-radius:50%;width:22px;height:22px;min-width:22px;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:.72rem;">${i+1}</span><span style="font-size:${1-i*0.05}rem;font-weight:700;">${esc(t.name)}</span></span>`
-        ).join('<span style="color:rgba(255,255,255,.25);margin:0 4px;">→</span>');
+        $('drWinner').innerHTML = ordered.map((t,i)=>`<span style="display:inline-flex;align-items:center;gap:5px;opacity:${1-i*0.12};"><span style="background:rgba(245,200,66,.2);border:1.5px solid rgba(245,200,66,.4);color:#f5c842;border-radius:50%;width:22px;height:22px;min-width:22px;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:.72rem;">${i+1}</span><span style="font-size:${1-i*0.05}rem;font-weight:700;">${esc(t.name)}</span></span>`).join('<span style="color:rgba(255,255,255,.25);margin:0 4px;">→</span>');
         $('startBtn').style.display='inline-flex';
         launchConfetti();
       }
@@ -1366,11 +1365,11 @@ function runGame(teamList){
   function renderQCards(ci,si){
     const cat = CATS[ci];
     const sub = cat.subs[si];
-    $('qCardsRow').innerHTML = sub.qs.map(q=>{
+    $('qCardsRow').innerHTML = sub.qs.map((q,idx)=>{
       const k   = cat.id+sub.id+q.pts;
       const done = !!used[k];
       return `
-        <div class="q-card ${done?'q-used':'q-free'}" ${done?'':` onclick="openQ('${cat.id}','${sub.id}',${sub.qs.indexOf(q)})"`}>
+        <div class="q-card ${done?'q-used':'q-free'}" ${done?'':` onclick="openQ('${cat.id}','${sub.id}',${idx})"`}>
           <span class="q-status">${done?'✅':'❓'}</span>
           <span class="q-pts">${q.pts}</span>
           <span class="q-pts-label">балл</span>
@@ -1404,7 +1403,7 @@ function runGame(teamList){
     `).join('');
     document.querySelectorAll('.ans').forEach(b=>b.onclick=onAns);
 
-    timeLeft=20; $('timerBox').textContent=20; $('timerBox').className='timer-box';
+    timeLeft=30; $('timerBox').textContent=30; $('timerBox').className='timer-box';
     clearInterval(timerInt);
     timerInt=setInterval(()=>{
       timeLeft--;
@@ -1608,8 +1607,3 @@ function launchConfetti(){
 </script>
 </body>
 </html>
-
-
-
-
-
