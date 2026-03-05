@@ -1074,23 +1074,57 @@ const CATS = [
     id:'oylan', icon:'psychology', iconColor:'#c084fc', name:'Ойлан-тап', color:'cat-3',
     subs:[
       {
-        id:'jumbaq', icon:'auto_fix_high', iconColor:'#e879f9', name:'Жұмбақтар',
-        qs:[
-          {pts:10, q:'Суға салсаң батпайды, отқа салсаң жанбайды, жерге салсаң шіримейді — бұл не?', opts:['А) Алтын','Б) Мұз','В) Тас','Г) Темір'], ok:0, law:'Жауап: Алтын — суда батпайтын, отта жанбайтын (ерісе де) асыл металл.'},
-          {pts:20, q:'Таңертең төрт аяқты, түсте екі аяқты, кешке үш аяқты — бұл не?', opts:['А) Жылқы','Б) Адам','В) Ит','Г) Тасбақа'], ok:1, law:'Классикалық жұмбақ: Адам — бала кезінде төрт аяқты, ересек екі аяқты, кәрілікте таяқпен үш аяқты.'},
-          {pts:30, q:'Мен бар болғанда сен жоқсың, сен бар болғанда мен жоқпын — бұл не?', opts:['А) Арман','Б) Көлеңке','В) Дыбыс','Г) Жарық'], ok:1, law:'Жауап: Көлеңке — жарық болғанда пайда болады, өзі болғанда жарық жоқ.'},
-          {pts:40, q:'Айтсаң да болады, айтпасаң да болады, бірақ ешкім айтпайды — бұл не?', opts:['А) Сыр','Б) Ауа','В) Ой','Г) Атың'], ok:3, law:'Жауап: Аты — адам өз атын өзіне айтпайды, бірақ өзгелер айтады.'},
-        ]
-      },
-      {
-        id:'logika', icon:'extension', iconColor:'#22d3ee', name:'Логика',
-        qs:[
-          {pts:10, q:'5 + 3 × 2 = ?', opts:['А) 16','Б) 11','В) 10','Г) 13'], ok:1, law:'Математика ережесі: алдымен көбейту: 3×2=6, содан соң 5+6=11.'},
-          {pts:20, q:'Егер барлық мысықтар жануар болса, кейбір жануарлар ақ болса, онда...', opts:['А) Барлық мысықтар ақ','Б) Кейбір мысықтар ақ болуы мүмкін','В) Ешбір мысық ақ емес','Г) Барлық ақтар мысық'], ok:1, law:'Логика: мүмкіндік пен міндеттілікті ажырату керек.'},
-          {pts:30, q:'"Мен өтірік айтамын" деген адам рас айтып жатыр ма?', opts:['А) Рас айтады','Б) Өтірік айтады','В) Логикалық қайшылық','Г) Жауабы жоқ'], ok:2, law:'Эпименид парадоксы — бұл өзіне-өзі қайшы келетін логикалық парадокс.'},
-          {pts:40, q:'100-ге дейін барлық тақ сандардың қосындысы қанша?', opts:['А) 2500','Б) 2550','В) 5000','Г) 2499'], ok:0, law:'1-ден 99-ға дейін 50 тақ сан бар. Формула: 50² = 2500.'},
-        ]
-      },
+  id:'jumbaq', icon:'auto_fix_high', iconColor:'#e879f9', name:'Жұмбақтар',
+  qs:[
+    // 10 балл
+    {pts:10, 
+     q:'<div style="text-align:center; background:rgba(0,0,0,0.2); padding:15px; border-radius:16px; margin-bottom:15px;">' +
+       '<img src="images/jumbaq1.jpg" ' +
+       'onclick="openFullImage(this.src)" ' +
+       'style="max-width:100%; max-height:220px; width:auto; height:auto; border-radius:12px; border:3px solid rgba(245,200,66,0.3); cursor:pointer; transition:0.2s;" ' +
+       'onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">' +
+       '</div>',
+     opts:['А) Алтын','Б) Мұз','В) Тас','Г) Темір'],
+     ok:0,
+     law:'Жауап: Алтын.'},
+
+    // 20 балл
+    {pts:20, 
+     q:'<div style="text-align:center; background:rgba(0,0,0,0.2); padding:15px; border-radius:16px; margin-bottom:15px;">' +
+       '<img src="images/jumbaq2.jpg" ' +
+       'onclick="openFullImage(this.src)" ' +
+       'style="max-width:100%; max-height:220px; width:auto; height:auto; border-radius:12px; border:3px solid rgba(245,200,66,0.3); cursor:pointer; transition:0.2s;" ' +
+       'onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">' +
+       '</div>',
+     opts:['А) Жылқы','Б) Адам','В) Ит','Г) Тасбақа'],
+     ok:1,
+     law:'Жауап: Адам.'},
+
+    // 30 балл
+    {pts:30, 
+     q:'<div style="text-align:center; background:rgba(0,0,0,0.2); padding:15px; border-radius:16px; margin-bottom:15px;">' +
+       '<img src="images/jumbaq3.jpg" ' +
+       'onclick="openFullImage(this.src)" ' +
+       'style="max-width:100%; max-height:220px; width:auto; height:auto; border-radius:12px; border:3px solid rgba(245,200,66,0.3); cursor:pointer; transition:0.2s;" ' +
+       'onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">' +
+       '</div>',
+     opts:['А) Арман','Б) Көлеңке','В) Дыбыс','Г) Жарық'],
+     ok:1,
+     law:'Жауап: Көлеңке.'},
+
+    // 40 балл
+    {pts:40, 
+     q:'<div style="text-align:center; background:rgba(0,0,0,0.2); padding:15px; border-radius:16px; margin-bottom:15px;">' +
+       '<img src="images/jumbaq4.jpg" ' +
+       'onclick="openFullImage(this.src)" ' +
+       'style="max-width:100%; max-height:220px; width:auto; height:auto; border-radius:12px; border:3px solid rgba(245,200,66,0.3); cursor:pointer; transition:0.2s;" ' +
+       'onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">' +
+       '</div>',
+     opts:['А) Сыр','Б) Ауа','В) Ой','Г) Атың'],
+     ok:3,
+     law:'Жауап: Атың.'},
+  ]
+},
       {
         id:'tapqyr', icon:'lightbulb', iconColor:'#fde047', name:'Тапқырлық',
         qs:[
@@ -1703,5 +1737,6 @@ function launchConfetti(){
 </script>
 </body>
 </html>
+
 
 
