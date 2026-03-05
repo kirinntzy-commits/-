@@ -1094,49 +1094,65 @@ const CATS = [
       {
         id:'tapqyr', icon:'lightbulb', iconColor:'#fde047', name:'Тапқырлық',
         qs:[
-          // 1-сұрақ: Стакандар (10 балл)
-          {pts:10, 
-           q:'<div style="text-align:center; background:rgba(0,0,0,0.2); padding:15px; border-radius:16px; margin-bottom:15px;">' +
-             '<img src="images/glass.jpg" style="max-width:100%; border-radius:12px; border:3px solid rgba(245,200,66,0.3);"></div>' +
-             'Суреттегі 7 стакан түтікшелермен жалғанған. Егер су ең жоғарғы стаканға құйыла бастаса, ' +
-             'қай стакан бірінші болып толады?',
-           opts:['А) 4-ші стакан','Б) 5-ші стакан','В) 6-ші стакан','Г) 7-ші стакан'],
-           ok:0,  // 4-ші стакан дұрыс
-           law:'Дұрыс жауап: 4-ші стакан. Түтікшелердің орналасуына қарай, су алдымен 4-ші стаканға жетеді.'},
+         // 1-сұрақ: Стакандар (10 балл)
+{pts:10, 
+ q:'<div style="text-align:center; background:rgba(0,0,0,0.2); padding:15px; border-radius:16px; margin-bottom:15px;">' +
+   '<img src="images/glass.png" ' +  // .jpg -> .png
+   'onclick="openFullImage(this.src)" ' +
+   'style="max-width:100%; max-height:220px; width:auto; height:auto; border-radius:12px; border:3px solid rgba(245,200,66,0.3); cursor:pointer; transition:0.2s;" ' +
+   'onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">' +
+   '</div>' +
+   '<p style="color:rgba(255,255,255,0.7); font-size:0.9rem; margin-top:5px;">🔍 Суретті басыңыз - үлкейтіп көру</p>' +
+   'Суреттегі 7 стакан түтікшелермен жалғанған. Егер су ең жоғарғы стаканға құйыла бастаса, ' +
+   'қай стакан бірінші болып толады?',
+ opts:['А) 4-ші стакан','Б) 5-ші стакан','В) 6-ші стакан','Г) 7-ші стакан'],
+ ok:0,
+ law:'Дұрыс жауап: 4-ші стакан.'},
 
-          // 2-сұрақ: Үшбұрыштар (20 балл)
-          {pts:20,
-           q:'<div style="text-align:center; background:rgba(0,0,0,0.2); padding:15px; border-radius:16px; margin-bottom:15px;">' +
-             '<img src="images/triangles.jpg" style="max-width:100%; border-radius:12px; border:3px solid rgba(245,200,66,0.3);"></div>' +
-             'Суретте неше үшбұрыш бар? (Барлық үшбұрыштарды санаңыз: кішкентай, орташа және үлкен)',
-           opts:['А) 12','Б) 13','В) 16','Г) 18'],
-           ok:1,  // 13 дұрыс
-           law:'Дұрыс жауап: 13 үшбұрыш. Есептеу: 9 кішкентай + 3 орташа (4 кішкентайдан құралған) + 1 үлкен = 13.'},
+// 2-сұрақ: Үшбұрыштар (20 балл)
+{pts:20,
+ q:'<div style="text-align:center; background:rgba(0,0,0,0.2); padding:15px; border-radius:16px; margin-bottom:15px;">' +
+   '<img src="images/triangles.avif" ' +  // .jpg -> .avif
+   'onclick="openFullImage(this.src)" ' +
+   'style="max-width:100%; max-height:220px; width:auto; height:auto; border-radius:12px; border:3px solid rgba(245,200,66,0.3); cursor:pointer; transition:0.2s;" ' +
+   'onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">' +
+   '</div>' +
+   '<p style="color:rgba(255,255,255,0.7); font-size:0.9rem; margin-top:5px;">🔍 Суретті басыңыз - үлкейтіп көру</p>' +
+   'Суретте неше үшбұрыш бар?',
+ opts:['А) 12','Б) 13','В) 16','Г) 18'],
+ ok:1,
+ law:'Дұрыс жауап: 13 үшбұрыш.'},
 
-          // 3-сұрақ: Логикалық есеп (30 балл)
-          {pts:30,
-           q:'<div style="text-align:center; background:rgba(0,0,0,0.2); padding:15px; border-radius:16px; margin-bottom:15px;">' +
-             '<img src="images/math-puzzle.png" ' +
-             'onclick="openFullImage(this.src)" ' +
-             'style="max-width:100%; max-height:250px; width:auto; height:auto; border-radius:12px; border:3px solid rgba(245,200,66,0.3); cursor:pointer; transition:0.2s;" ' +
-             'onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">' +
-             '</div>' +
-             '<p style="color:rgba(255,255,255,0.7); font-size:0.9rem; margin-top:5px;">🔍 Суретті басыңыз - үлкейтіп көру</p>',
-           opts:['А) 113','Б) 115','В) 117','Г) 119'],
-           ok:0,
-           law:'Дұрыс жауап: 113. Мұнда әр фигураның мәні: төртбұрыш = 9, дөңгелек = 3, үшбұрыш = 4, жұлдызша = 6.'},
-          
-          // 4-сұрақ: Түрлі-түсті фигуралар (40 балл)
-          {pts:40,
-           q:'<div style="text-align:center; background:rgba(0,0,0,0.2); padding:15px; border-radius:16px; margin-bottom:15px;">' +
-             '<img src="images/colored-shapes.png" style="max-width:100%; border-radius:12px; border:3px solid rgba(245,200,66,0.3);"></div>' +
-             'Қызыл төртбұрыш + көк дөңгелек = 18<br>' +
-             'Көк дөңгелек + жасыл үшбұрыш = 36<br>' +
-             'Жасыл үшбұрыш + сары жұлдызша = 45<br>' +
-             'Қызыл төртбұрыш + сары жұлдызша = ?',
-           opts:['А) 52','Б) 54','В) 56','Г) 58'],
-           ok:1,  // 54 дұрыс
-           law:'Дұрыс жауап: 54. Мұнда әр фигураның мәні: төртбұрыш = 6, дөңгелек = 12, үшбұрыш = 24, жұлдызша = 48. Сонда: 6 + 48 = 54.'}
+// 3-сұрақ: Логикалық есеп (30 балл)
+{pts:30,
+ q:'<div style="text-align:center; background:rgba(0,0,0,0.2); padding:15px; border-radius:16px; margin-bottom:15px;">' +
+   '<img src="images/math-puzzle.png" ' +  // дұрыс
+   'onclick="openFullImage(this.src)" ' +
+   'style="max-width:100%; max-height:250px; width:auto; height:auto; border-radius:12px; border:3px solid rgba(245,200,66,0.3); cursor:pointer; transition:0.2s;" ' +
+   'onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">' +
+   '</div>' +
+   '<p style="color:rgba(255,255,255,0.7); font-size:0.9rem; margin-top:5px;">🔍 Суретті басыңыз - үлкейтіп көру</p>' +
+   '× = 27, + = 5, × = 108. Сонда + × = ?',
+ opts:['А) 113','Б) 115','В) 117','Г) 119'],
+ ok:0,
+ law:'Дұрыс жауап: 113.'},
+
+// 4-сұрақ: Түрлі-түсті фигуралар (40 балл)
+{pts:40,
+ q:'<div style="text-align:center; background:rgba(0,0,0,0.2); padding:15px; border-radius:16px; margin-bottom:15px;">' +
+   '<img src="images/colored-shapes.avif" ' +  // .png -> .avif
+   'onclick="openFullImage(this.src)" ' +
+   'style="max-width:100%; max-height:220px; width:auto; height:auto; border-radius:12px; border:3px solid rgba(245,200,66,0.3); cursor:pointer; transition:0.2s;" ' +
+   'onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">' +
+   '</div>' +
+   '<p style="color:rgba(255,255,255,0.7); font-size:0.9rem; margin-top:5px;">🔍 Суретті басыңыз - үлкейтіп көру</p>' +
+   'Қызыл төртбұрыш + көк дөңгелек = 18<br>' +
+   'Көк дөңгелек + жасыл үшбұрыш = 36<br>' +
+   'Жасыл үшбұрыш + сары жұлдызша = 45<br>' +
+   'Қызыл төртбұрыш + сары жұлдызша = ?',
+ opts:['А) 52','Б) 54','В) 56','Г) 58'],
+ ok:1,
+ law:'Дұрыс жауап: 54.'}
         ]
       },
     ]
@@ -1699,3 +1715,4 @@ function launchConfetti(){
 </script>
 </body>
 </html>
+
