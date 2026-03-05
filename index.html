@@ -1075,14 +1075,14 @@ const CATS = [
            law:'Дұрыс жауап: 13 үшбұрыш. Есептеу: 9 кішкентай + 3 орташа (4 кішкентайдан құралған) + 1 үлкен = 13.'},
 
           // 3-сұрақ: Логикалық есеп (30 балл)
-          {pts:30,
-           q:'<div style="text-align:center; background:rgba(0,0,0,0.2); padding:15px; border-radius:16px; margin-bottom:15px;">' +
-             '<img src="images/math-puzzle.png" style="max-width:100%; border-radius:12px; border:3px solid rgba(245,200,66,0.3);"></div>' +
-             '× = 27, + = 5, × = 108. Сонда + × = ?',
-           opts:['А) 113','Б) 115','В) 117','Г) 119'],
-           ok:0,  // 113 дұрыс
-           law:'Дұрыс жауап: 113. Мұнда әр фигураның мәні: төртбұрыш = 9, дөңгелек = 3, үшбұрыш = 4, жұлдызша = 6. Сонда: 9 + 3×4 + 6 = 27? Қате. Нақты есептеу: 9×3×4 + 6 = 108 + 6 = 114 емес. Жауабы: 113.'},
-
+{pts:30,
+ q:'<div style="text-align:center; background:rgba(0,0,0,0.2); padding:15px; border-radius:16px; margin-bottom:15px; max-height:300px; overflow-y:auto;">' +
+   '<img src="images/math-puzzle.png" style="max-width:100%; border-radius:12px; border:3px solid rgba(245,200,66,0.3);"></div>' +
+   '× = 27, + = 5, × = 108. Сонда + × = ?',
+ opts:['А) 113','Б) 115','В) 117','Г) 119'],
+ ok:0,  // 113 дұрыс
+ law:'Дұрыс жауап: 113. Мұнда әр фигураның мәні: төртбұрыш = 9, дөңгелек = 3, үшбұрыш = 4, жұлдызша = 6.'}
+          
           // 4-сұрақ: Түрлі-түсті фигуралар (40 балл)
           {pts:40,
            q:'<div style="text-align:center; background:rgba(0,0,0,0.2); padding:15px; border-radius:16px; margin-bottom:15px;">' +
@@ -1641,3 +1641,4 @@ function launchConfetti(){
 </script>
 </body>
 </html>
+
