@@ -1257,7 +1257,6 @@ function toast(msg){
 //  PHONE
 // ════════════════════════════════════════════
 function initPhone(){
-  const db = window._db;
   let teamName='', members=[];
 
   const tInp = $('tNameInp');
@@ -1303,30 +1302,41 @@ function initPhone(){
   }
   window.rmM = i=>{ members.splice(i,1); renderMems(); };
 
-  // ⬇️⬇️⬇️ ОСЫ КОДТЫ initPhone ІШІНЕ ҚОЙЫҢЫЗ ⬇️⬇️⬇️
-  async function submitTeam(){
+  // ⭐ ЖАҢА: LocalStorage арқылы команданы сақтау
+  function submitTeam(){
     const team = { 
       id: Date.now() + '_' + Math.random().toString(36).slice(2, 6), 
       name: teamName, 
       members: [...members], 
       ts: Date.now() 
     };
+    
     try {
-      await window._set(window._ref(db, 'teams/' + team.id), team);
+      // LocalStorage-тан бар командаларды алу
+      let allTeams = JSON.parse(localStorage.getItem('bilimTeams') || '{}');
+      // Жаңа команданы қосу
+      allTeams[team.id] = team;
+      // LocalStorage-қа сақтау
+      localStorage.setItem('bilimTeams', JSON.stringify(allTeams));
+      
+      // Басты экранға сигнал жіберу (жаңарту үшін)
+      localStorage.setItem('team_updated', Date.now().toString());
+      
+      // Сәтті тіркелді
       $('sucName').textContent = teamName;
       $('sucMem').textContent = members.length + ' мүше: ' + members.join(', ');
       goPS(3);
+      
+      console.log('✅ Команда сақталды:', team);
     } catch(e) { 
-      console.error('Firebase error:', e);
-      pAlert('Қате! Firebase жұмыс жасамады. Қайталап көріңіз.'); 
+      console.error('❌ Қате:', e);
+      pAlert('Қате! Қайталап көріңіз.'); 
     }
   }
-  // ⬆️⬆️⬆️ КОДТЫҢ СОҢЫ ⬆️⬆️⬆️
 
   function goPS(n){
     ['ps1','ps2','ps3'].forEach(id=>$(id).classList.remove('on'));
     $('ps'+n).classList.add('on');
-    // Step dots
     const configs = {
       1:[['cur','',''],['','',''],['done','done','']],
       2:[['done','',''],['cur','done',''],['done','done','']],
@@ -1360,11 +1370,27 @@ function initMain(){
 
   let teams={}, drawIdx=0, drawDone=false;
 
-  // Realtime listener
-  window._onVal(window._ref(db,'teams'), snap=>{
-    teams = snap.val()||{};
-    renderTeams();
-  });
+// ⭐ LocalStorage тыңдауы
+function loadTeamsFromStorage(){
+  const stored = JSON.parse(localStorage.getItem('bilimTeams') || '{}');
+  teams = stored;
+  renderTeams();
+}
+
+// Алғашқы жүктеу
+loadTeamsFromStorage();
+
+// Басқа қойындыдан өзгеріс келгенде жаңарту
+window.addEventListener('storage', (e) => {
+  if(e.key === 'bilimTeams' || e.key === 'team_updated'){
+    loadTeamsFromStorage();
+  }
+});
+
+// Әр 2 секунд сайын тексеру (телефон мен компьютер арасында)
+setInterval(() => {
+  loadTeamsFromStorage();
+}, 2000);
 
   function teamList(){ return Object.values(teams).sort((a,b)=>a.ts-b.ts); }
 
@@ -1446,13 +1472,15 @@ function initMain(){
     runGame(ordered);
   };
 
-  // Clear
-  $('clearBtn').onclick = async()=>{
-    if(!confirm('Барлық командаларды өшіресіз бе?'))return;
-    await window._remove(window._ref(db,'teams'));
-    $('drawResult').classList.remove('show');
-    $('startBtn').style.display='none';
-  };
+// Clear
+$('clearBtn').onclick = async()=>{
+  if(!confirm('Барлық командаларды өшіресіз бе?'))return;
+  localStorage.removeItem('bilimTeams');
+  teams = {};
+  renderTeams();
+  $('drawResult').classList.remove('show');
+  $('startBtn').style.display = 'none';
+};
 }
 
 // ════════════════════════════════════════════
