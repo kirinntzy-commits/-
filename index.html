@@ -1303,15 +1303,25 @@ function initPhone(){
   }
   window.rmM = i=>{ members.splice(i,1); renderMems(); };
 
+  // ⬇️⬇️⬇️ ОСЫ КОДТЫ initPhone ІШІНЕ ҚОЙЫҢЫЗ ⬇️⬇️⬇️
   async function submitTeam(){
-    const team = { id:Date.now()+'_'+Math.random().toString(36).slice(2,6), name:teamName, members:[...members], ts:Date.now() };
+    const team = { 
+      id: Date.now() + '_' + Math.random().toString(36).slice(2, 6), 
+      name: teamName, 
+      members: [...members], 
+      ts: Date.now() 
+    };
     try {
-      await window._set(window._ref(db,'teams/'+team.id), team);
+      await window._set(window._ref(db, 'teams/' + team.id), team);
       $('sucName').textContent = teamName;
-      $('sucMem').textContent  = members.length+' мүше: '+members.join(', ');
+      $('sucMem').textContent = members.length + ' мүше: ' + members.join(', ');
       goPS(3);
-    } catch(e){ pAlert('Қате! Firebase жұмыс жасамады.'); }
+    } catch(e) { 
+      console.error('Firebase error:', e);
+      pAlert('Қате! Firebase жұмыс жасамады. Қайталап көріңіз.'); 
+    }
   }
+  // ⬆️⬆️⬆️ КОДТЫҢ СОҢЫ ⬆️⬆️⬆️
 
   function goPS(n){
     ['ps1','ps2','ps3'].forEach(id=>$(id).classList.remove('on'));
